@@ -6,7 +6,7 @@ describe('Categories Model', () => {
 
   beforeEach(() => {
     categories = new Categories();
-  })
+  });
 
   // How might we repeat this to check on types?
   it('sanitize() returns undefined with missing requirements', () => {
@@ -23,24 +23,24 @@ describe('Categories Model', () => {
   it('can post() a new category', () => {
     let obj = { name: 'Test Category' };
     return categories.create(obj)
-        .then(record => {
-          Object.keys(obj).forEach(key => {
-            expect(record[key]).toEqual(obj[key]);
-          });
-        })
-        .catch(e => console.error('ERR', e));
+      .then(record => {
+        Object.keys(obj).forEach(key => {
+          expect(record[key]).toEqual(obj[key]);
+        });
+      })
+      .catch(e => console.error('ERR', e));
   });
 
   it('can get() a category', () => {
     let obj = { name: 'Test Category' };
     return categories.create(obj)
-        .then(record => {
-          return categories.get(record._id)
-              .then(category => {
-                Object.keys(obj).forEach(key => {
-                  expect(category[0][key]).toEqual(obj[key]);
-                });
-              });
+      .then(record => {
+        return categories.get(record._id)
+          .then(category => {
+            Object.keys(obj).forEach(key => {
+              expect(category[0][key]).toEqual(obj[key]);
+            });
+          });
         });
   });
 
@@ -49,13 +49,13 @@ describe('Categories Model', () => {
     let obj2 = { name: 'Update Category' };
 
     return categories.create(obj)
-        .then(() => categories.create(obj2))
-        .then(record => categories.update(record.id, obj2))
-        .then(category => {
-          Object.keys(obj2).forEach(key => {
-            expect(category[key]).toEqual(obj2[key]);
-          });
-        })
+       .then(() => categories.create(obj2))
+       .then(record => categories.update(record.id, obj2))
+       .then(category => {
+         Object.keys(obj2).forEach(key => {
+           expect(category[key]).toEqual(obj2[key]);
+         });
+       })
         .catch(error => console.error('UPDATE ERROR', error));
   });
 
