@@ -1,15 +1,18 @@
 // 'use strict';
 //
-// class Validator {
-//   String (input) {
-//     return typeof input === 'string';
-//     };
-//   Number (input) {
-//     return typeof input === 'number';
-//   };
-//   Boolean = (input) => {
-//     return typeof input === 'boolean';
-//   };
-// }
+// let validator = module.exports = {};
 //
-// modlue.exports = Validator;
+//
+// validator.isValid = (input, rules) => {
+//   return true;
+// };
+//
+//
+// validator.isString = (input) => {
+//   return typeof input === 'string';
+// };
+//
+//
+// validator.isNumber = (input) => {
+//   return typeof input === 'number';
+// };
