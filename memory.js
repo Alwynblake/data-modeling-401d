@@ -1,9 +1,6 @@
 'use strict';
 
 const uuid = require('uuid/v4');
-const validator = require('./validator.js');
-//create a new instance each time method is run
-const validator = new validator();
 
 class Model {
 
@@ -34,11 +31,13 @@ class Model {
     return Promise.resolve();
   }
 
+  // create a dummy object to compare whats coming in from what is valid.
   sanitize(entry) {
 
     let valid = true;
     let record = {};
 
+    // get an array of the schema and then loop through them
     Object.keys(this.schema).forEach(field => {
       if (this.schema[field].required) {
         if (entry[field]) {

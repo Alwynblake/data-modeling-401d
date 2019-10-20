@@ -44,6 +44,35 @@ describe('Categories Model', () => {
         });
   });
 
-});
+  it('can update() a category', () => {
+    let obj = { name: 'Test Category' };
+    let obj2 = { name: 'Update Category' };
 
-// module.exports = categories.test.js;
+    return categories.create(obj)
+        .then(() => categories.create(obj2))
+        .then(record => categories.update(record.id, obj2))
+        .then(category => {
+          Object.keys(obj2).forEach(key => {
+            expect(category[key]).toEqual(obj2[key]);
+          });
+        })
+        .catch(error => console.error('UPDATE ERROR', error));
+  });
+
+  it('can delete() a category', () => {
+    let obj = { name: 'Test Category' };
+    let obj2 = { name: 'Test Category 2' };
+
+    return categories.create(obj)
+        .then(record => categories.create(obj2))
+        .then(record => categories.delete(record.id))
+        .then(() => {
+          Object.keys(obj).forEach(key => {
+            expect(categories.database[0][key]).toEqual(obj[key]);
+            expect(categories.database.length).toEqual(1);
+          });
+        })
+        .catch(error => console.error('DELETE ERROR', error));
+  });
+
+});
